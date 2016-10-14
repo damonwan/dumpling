@@ -11,32 +11,32 @@
       <div class="panel-heading">
          <div class="form-group">
          <input type="search" name="keyword" class="form-control" placeholder="关键字搜索" value="{{ request.GET.keyword }}">
-         <input type="number" name="rating" class="form-control" placeholder="评分高于XX分" value="{{ request.GET.rating }}">
-         <input type="number" name="ratingnumbers" class="form-control" placeholder="评分人数多于XX人" value="{{ request.GET.ratingnumbers }}">
+         评分高于<input type="number" name="rating" class="form-control" placeholder="" value="{{ request.GET.rating }}">
+        评分人数多于<input type="number" name="ratingnumbers" class="form-control" placeholder="" value="{{ request.GET.ratingnumbers }}">
          </div>
          <button type="submit" class="btn btn-primary">Search</button>
       </div>
 	</div>
 	<div id="subject_list">
     <ul class="subject-list">
-	{% for book in book_list %}
+	{% for item in item_list %}
 	<li class="subject-item">
 		<div class="pic">
-			<a class="nbg" href="{{book.url}}" target="blank"> <img class="" src="{{book.image}}" width="90">
+			<a class="nbg" href="{{item.url}}" target="blank"> <img class="" src="{{item.image}}" width="90">
 			</a>
 		</div>
 		<div class="info">
 			<h2 class="">
-				<a href="{{book.url}}" title="{{book.name}}" target="blank">{{book.name}}</a>
+				<a href="{{item.url}}" title="{{item.name}}" target="blank">{{item.name}}</a>
 			</h2>
-			<div class="pub">{{book.info}}</div>
+			<div class="pub">{{item.info}}</div>
 			<div class="star clearfix">
-				{% if book.rating %}
-				评分：{{book.rating}}
+				{% if item.rating %}
+				评分：{{item.rating}}
 				{% endif %}
 				<span class="pl">
-				{% if book.rating_numbers %}
-					({{book.rating_numbers}}人评价) 
+				{% if item.rating_numbers %}
+					({{item.rating_numbers}}人评价) 
 				{% else %}
 					(暂无评价)
 				{% endif %}
@@ -49,7 +49,7 @@
     {% endfor %}
     </ul>
     </div>
-    {% if book_list %}
+    {% if item_list %}
     <div class="pagination">
 	    <span class="step-links">
 	        <span class="current">
@@ -57,10 +57,10 @@
 	        </span>
 	
 	        {% if page_obj.has_previous %}
-	            <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+	            <a href="?page={{ page_obj.previous_page_number }}&keyword={{request.GET.keyword}}&rating={{request.GET.rating}}&ratingnumbers={{request.GET.ratingnumbers}}">上一页</a>
 	        {% endif %}
 	        {% if page_obj.has_next %}
-	            <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+	            <a href="?page={{ page_obj.next_page_number }}&keyword={{request.GET.keyword}}&rating={{request.GET.rating}}&ratingnumbers={{request.GET.ratingnumbers}}">下一页</a>
 	        {% endif %}
 	    </span>
 	</div>
