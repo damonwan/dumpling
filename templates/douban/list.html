@@ -5,7 +5,18 @@
 <div id="wrapper">
 <div id="content">
 <div class="grid-16-8 clearfix">
+<form class="form-inline" role="form" action="" method="GET">
 <div class="article">
+	<div>
+      <div class="panel-heading">
+         <div class="form-group">
+         <input type="search" name="keyword" class="form-control" placeholder="关键字搜索" value="{{ request.GET.keyword }}">
+         <input type="number" name="rating" class="form-control" placeholder="评分高于XX分" value="{{ request.GET.rating }}">
+         <input type="number" name="ratingnumbers" class="form-control" placeholder="评分人数多于XX人" value="{{ request.GET.ratingnumbers }}">
+         </div>
+         <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+	</div>
 	<div id="subject_list">
     <ul class="subject-list">
 	{% for book in book_list %}
@@ -20,9 +31,8 @@
 			</h2>
 			<div class="pub">{{book.info}}</div>
 			<div class="star clearfix">
-				<span class="allstar50"></span>
 				{% if book.rating %}
-				<span class="rating_nums">{{book.rating}}</span>
+				评分：{{book.rating}}
 				{% endif %}
 				<span class="pl">
 				{% if book.rating_numbers %}
@@ -56,6 +66,7 @@
 	</div>
 	{% endif %}
 </div>
+</form>
 </div>
 </div>
 </div>

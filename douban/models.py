@@ -12,4 +12,4 @@ class Book(models.Model):
     gmt_create = models.DateField(auto_now_add=True)
     gmt_modified = models.DateField(auto_now=True)
     def __str__(self):
-        return self.name, self.item_id
+        return self.name
