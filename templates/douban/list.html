@@ -1,0 +1,47 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'douban/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'douban/master.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'douban/123.css' %}" />
+{% if book_list %}
+	<div id="wrapper">
+	<div id="content">
+	<div class="grid-16-8 clearfix">
+	<div class="article">
+	<div id="subject_list">
+    <ul class="subject-list">
+	{% for book in book_list %}
+	<li class="subject-item">
+		<div class="pic">
+			<a class="nbg" href="{{book.url}}" target="blank"> <img class="" src="{{book.image}}" width="90">
+			</a>
+		</div>
+		<div class="info">
+			<h2 class="">
+				<a href="{{book.url}}" title="{{book.name}}" target="blank">{{book.name}}</a>
+			</h2>
+			<div class="pub">{{book.info}}</div>
+			<div class="star clearfix">
+				<span class="allstar50"></span>
+				{% if book.rating %}
+				<span class="rating_nums">{{book.rating}}</span>
+				{% endif %}
+				<span class="pl">
+				{% if book.rating_numbers %}
+					({{book.rating_numbers}}人评价) 
+				{% else %}
+					(暂无评价)
+				{% endif %}
+				</span>
+			</div>
+		</div>
+	</li>
+    {% endfor %}
+    </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+{% else %}
+    <p>没有图书信息</p>
+{% endif %}
