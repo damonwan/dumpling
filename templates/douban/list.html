@@ -2,11 +2,10 @@
 <link rel="stylesheet" type="text/css" href="{% static 'douban/style.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'douban/master.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'douban/123.css' %}" />
-{% if book_list %}
-	<div id="wrapper">
-	<div id="content">
-	<div class="grid-16-8 clearfix">
-	<div class="article">
+<div id="wrapper">
+<div id="content">
+<div class="grid-16-8 clearfix">
+<div class="article">
 	<div id="subject_list">
     <ul class="subject-list">
 	{% for book in book_list %}
@@ -35,13 +34,28 @@
 			</div>
 		</div>
 	</li>
+	{% empty %}
+	<li>没有图书信息</li>
     {% endfor %}
     </ul>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-{% else %}
-    <p>没有图书信息</p>
-{% endif %}
+    {% if book_list %}
+    <div class="pagination">
+	    <span class="step-links">
+	        <span class="current">
+	            第 {{ page_obj.number }} 页，总计 {{ page_obj.paginator.num_pages }}页
+	        </span>
+	
+	        {% if page_obj.has_previous %}
+	            <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+	        {% endif %}
+	        {% if page_obj.has_next %}
+	            <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+	        {% endif %}
+	    </span>
+	</div>
+	{% endif %}
+</div>
+</div>
+</div>
+</div>
