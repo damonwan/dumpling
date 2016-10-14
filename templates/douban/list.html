@@ -10,11 +10,9 @@
 	<div>
       <div class="panel-heading">
          <div class="form-group">
-         <input type="search" name="keyword" class="form-control" placeholder="关键字搜索" value="{{ request.GET.keyword }}">
-         评分高于<input type="number" name="rating" class="form-control" placeholder="" value="{{ request.GET.rating }}">
-        评分人数多于<input type="number" name="ratingnumbers" class="form-control" placeholder="" value="{{ request.GET.ratingnumbers }}">
+	         <input type="search" name="keyword" class="form-control" placeholder="关键字搜索" value="{{ request.GET.keyword }}">
+	         <button type="submit" class="btn btn-primary">Search</button>
          </div>
-         <button type="submit" class="btn btn-primary">Search</button>
       </div>
 	</div>
 	<div id="subject_list">

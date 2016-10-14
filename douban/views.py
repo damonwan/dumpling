@@ -11,18 +11,10 @@ class BookListView(ListView):
     paginate_by = 20
     
     def get_queryset(self):
-        book_list = Book.objects.order_by('-rating', '-rating_numbers').all()
+        book_list = Book.objects.order_by('-rating', '-rating_numbers').all().filter(rating__gte=7.5).filter(rating_numbers__gte=10000)
         keyword = self.request.GET.get('keyword')
         if keyword:
             book_list = book_list.filter(Q(name__contains=keyword)|Q(info__contains=keyword)|Q(tags__contains=keyword))
-        rating = self.request.GET.get('rating')
-        if rating:
-            book_list = book_list.filter(rating__gte=rating)
-        ratingnumbers = self.request.GET.get('ratingnumbers')
-        if ratingnumbers:
-            book_list = book_list.filter(rating_numbers__gte=ratingnumbers)
-            
-        print(keyword if keyword else 'abc')
         return book_list
     
 class MovieListView(ListView):
@@ -32,16 +24,10 @@ class MovieListView(ListView):
     paginate_by = 20
     
     def get_queryset(self):
-        movie_list = Movie.objects.order_by('-rating').order_by('-rating_numbers').all()
+        movie_list = Movie.objects.order_by('-rating', '-rating_numbers').all().filter(rating__gte=7.5).filter(rating_numbers__gte=10000)
         keyword = self.request.GET.get('keyword')
         if keyword:
             movie_list = movie_list.filter(Q(name__contains=keyword)|Q(info__contains=keyword)|Q(tags__contains=keyword))
-        rating = self.request.GET.get('rating')
-        if rating:
-            movie_list = movie_list.filter(rating__gte=rating)
-        ratingnumbers = self.request.GET.get('ratingnumbers')
-        if ratingnumbers:
-            movie_list = movie_list.filter(rating_numbers__gte=ratingnumbers)
         return movie_list
 
 def book_spider(request):
